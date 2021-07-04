@@ -10,7 +10,6 @@ const RaceRow = ({raceInfo}) => {
     }
     const currentDate = new Date();
     const currentIcon = new Date(raceInfo['date']) < currentDate ? "check circle" : "circle outline"
-    console.log(raceInfo)
     return (
         <List.Item onClick={() => rowInfo()}>
             <List.Icon name={currentIcon} className="icon"/>

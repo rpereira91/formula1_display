@@ -5,7 +5,8 @@ const RComponent = ({raceInfo}) => {
     const displayInfo = () => {
         getQualifying(raceInfo['season'], raceInfo['round'])
             .then((qualifying) => {
-                console.log(qualifying)
+                // console.log(qualifying)
+                return qualifying
             })
     }
     return (

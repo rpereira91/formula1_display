@@ -18,7 +18,6 @@ const RaceInfo = ({season, round, url = null}) => {
                     getResults(season, round)
                         .then((results) => {
                             setResults(results.Races[0]['Results'])
-                            console.log(results.Races[0]['Results'])
                         }
                         )
                         .catch((err) => console.log(err))
@@ -32,31 +31,35 @@ const RaceInfo = ({season, round, url = null}) => {
     return !loading ? (
         <Container>
             <Container textAlign='left'>Qualifying: {qualifying.length > 0 ? "Complete" : "Incomplete"}</Container>
-            <Container textAlign='left'>Race Status: {results.length > 0 ? "Complete" : "Incomplete"}</Container>
-            <Button onClick={() => setShowModal(true)}>More Info</Button>
+            <Container textAlign='right'>Race Status: {results.length > 0 ? "Complete" : "Incomplete"}</Container>
+            {/* <Button onClick={() => setShowModal(true)}>More Info</Button> */}
             {url && <Button onClick={() => window.open(url, "_blank")}>Wiki</Button>}
-            <Modal
-                basic
-                onClose={() => setShowModal(false)}
-                onOpen={() => setShowModal(true)}
-                open={showModal}
-                size='small'
-                >
-                <Header icon>
-                    Race Name
-                </Header>
-                <Modal.Content>
-                    <p>
-                    Your inbox is getting full, would you like us to enable automatic
-                    archiving of old messages?
-                    </p>
-                </Modal.Content>
-                <Modal.Actions>
-                    <Button basic color='red' inverted onClick={() => setShowModal(false)}>
-                        Dismiss
-                    </Button>
-                </Modal.Actions>
-            </Modal>
+            {
+                qualifying.length > 0 && (<div>
+                    Qualifying: {
+                        qualifying.map((race, index) => {
+                            if (index < 5) {
+                                return (
+                                    <div>{race['Driver']['givenName']} {race['Driver']['familyName']}</div>
+                                )
+                            }
+                        })
+                    }
+                </div>)
+            }
+            {
+                results.length > 0 && (<div>
+                    Results: {
+                        results.map((race, index) => {
+                            if (index < 5) {
+                                return (
+                                    <div>{race['Driver']['givenName']} {race['Driver']['familyName']}</div>
+                                )
+                            }
+                        })
+                    }
+                </div>)
+            }
         </Container>
     ) : <Loader content='Loading races...'/>
 }
