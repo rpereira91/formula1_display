@@ -29,38 +29,41 @@ const RaceInfo = ({season, round, url = null}) => {
 
     }, [season, round])
     return !loading ? (
-        <Container>
-            <Container textAlign='left'>Qualifying: {qualifying.length > 0 ? "Complete" : "Incomplete"}</Container>
-            <Container textAlign='right'>Race Status: {results.length > 0 ? "Complete" : "Incomplete"}</Container>
+        <div>
             {/* <Button onClick={() => setShowModal(true)}>More Info</Button> */}
             {url && <Button onClick={() => window.open(url, "_blank")}>Wiki</Button>}
-            {
-                qualifying.length > 0 && (<div>
-                    Qualifying: {
-                        qualifying.map((race, index) => {
-                            if (index < 5) {
-                                return (
-                                    <div>{race['Driver']['givenName']} {race['Driver']['familyName']}</div>
-                                )
-                            }
-                        })
-                    }
-                </div>)
-            }
-            {
-                results.length > 0 && (<div>
-                    Results: {
-                        results.map((race, index) => {
-                            if (index < 5) {
-                                return (
-                                    <div>{race['Driver']['givenName']} {race['Driver']['familyName']}</div>
-                                )
-                            }
-                        })
-                    }
-                </div>)
-            }
-        </Container>
+            <Container textAlign='left' fluid>
+                Qualifying: {qualifying.length > 0 ? "Complete" : "Incomplete"}
+                {
+                    qualifying.length > 0 && (<div>
+                        Qualifying: {
+                            qualifying.map((race, index) => {
+                                if (index < 5) {
+                                    return (
+                                        <div>{race['Driver']['givenName']} {race['Driver']['familyName']}</div>
+                                    )
+                                }
+                            })
+                        }
+                    </div>)
+                }
+            </Container>
+            <Container textAlign='right'>Race Status: {results.length > 0 ? "Complete" : "Incomplete"}
+                {
+                    results.length > 0 && (<div>
+                        Results: {
+                            results.map((race, index) => {
+                                if (index < 5) {
+                                    return (
+                                        <div>{race['Driver']['givenName']} {race['Driver']['familyName']}</div>
+                                    )
+                                }
+                            })
+                        }
+                    </div>)
+                }
+            </Container>
+        </div>
     ) : <Loader content='Loading races...'/>
 }
 

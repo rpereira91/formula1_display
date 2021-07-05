@@ -1,18 +1,25 @@
 import moment from 'moment-timezone'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react';
+import YearPicker from '../components/YearPicker';
 import { getYearDrivers } from '../utils/api'
-import {Table, Flag} from 'semantic-ui-react'
+import {Table, Flag, Container, Popup} from 'semantic-ui-react'
 import {getCountryCode} from '../utils/utils';
+import { currentYear } from '../utils/constants';
+import "./PagesStyle.css";
 
 const Drivers = () => {
     const [drivers, setDrivers] = useState(null)
+    const [selectedYear, setSelectedYear] = useState(currentYear)
+    const [showYearSelect, setShowYearSelect] = useState(false)
+
     useEffect(() => {
-        getYearDrivers(2021)
+        getYearDrivers(selectedYear)
             .then((drivers) => setDrivers(drivers))
-    }, [])
+    }, [selectedYear])
     return (
-        <div>
-            <h1>Drivers</h1>
+        <Container className="pageContainer">
+            <h1 onClick={() => setShowYearSelect(!showYearSelect)}>Drivers</h1>
+            {showYearSelect && <YearPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />}
             {
                 drivers && (
                     <div>
@@ -31,10 +38,11 @@ const Drivers = () => {
                                     var date1 = moment();
                                     var date2 = moment(driver.dateOfBirth);
                                     var age = date1.diff(date2, 'years');
+                                    console.log(driver.givenName, driver.nationality)
                                     return (
                                         <Table.Row key={driver.driverId}>
                                             <Table.Cell>{driver.permanentNumber}</Table.Cell>
-                                            <Table.Cell><Flag name={getCountryCode(driver.nationality)} /></Table.Cell>
+                                            <Table.Cell><Popup basic content={driver.nationality} trigger={<Flag name={getCountryCode(driver.nationality)} />} /></Table.Cell>
                                             <Table.Cell>{driver.givenName}</Table.Cell>
                                             <Table.Cell>{driver.familyName}</Table.Cell>
                                             <Table.Cell>{age}</Table.Cell>
@@ -47,7 +55,7 @@ const Drivers = () => {
                     </div>
                 )
             }
-        </div>
+        </Container>
     )
 }
 

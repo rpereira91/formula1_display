@@ -13,7 +13,7 @@ function App() {
 
   return (
     <Router>
-    <Container text>
+    <Container>
       <NavBar />
       <Route exact path={PATHS.HOME.route} component={Home} />
       <Route path={PATHS.SCHEDULE.route} component={Schedule} />

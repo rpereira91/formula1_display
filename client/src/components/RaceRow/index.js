@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { List } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 import RaceInfo from '../RaceInfo'
 
 import './RaceRow.css'
@@ -9,22 +9,25 @@ const RaceRow = ({raceInfo}) => {
         setShowRaceInfo(!showRaceInfo)
     }
     const currentDate = new Date();
-    const currentIcon = new Date(raceInfo['date']) < currentDate ? "check circle" : "circle outline"
+    const currentIcon = new Date(raceInfo['date']) > currentDate 
     return (
-        <List.Item onClick={() => rowInfo()}>
-            <List.Icon name={currentIcon} className="icon"/>
-            <List.Content>
-                <List.Header>{raceInfo['raceName']}</List.Header>
-                <List.Description>
-                    Date: {raceInfo['date']}
+        <div className="listRow">
+            <div className="listContent">
+                
+                <h2 onClick={() => rowInfo()}> <Icon name={"flag checkered"} className={currentIcon ? "icon disabled" : "icon enabled"}/> {raceInfo['raceName']}</h2>
+                <div className="listBody">
+                    <span>Date: {raceInfo['date']}</span>
                     {
                         showRaceInfo && (
-                            <RaceInfo season={raceInfo['season']} round={ raceInfo['round']} url={raceInfo['url']}/>
+                            <>
+                                <div>Circut: {raceInfo['Circuit']['circuitName']} Country:{raceInfo['Circuit']['Location']['country']}</div>
+                                <RaceInfo season={raceInfo['season']} round={ raceInfo['round']} url={raceInfo['url']} />
+                            </>
                         )
                     }
-                </List.Description>
-            </List.Content>
-        </List.Item>
+                </div>
+            </div>
+        </div>
     )
 }
 

@@ -1,6 +1,18 @@
+.listRow{
+    color: black;
+    font-family: "F1Font";
+}
+
 .nextRace {
     background-color: aqua;
 }
-.icon {
+.icon.enabled {
     color: green;
+}
+.icon.disabled {
+    color: red;
+}
+
+.listBody{
+    padding: 0em 1em  
 }
