@@ -1,11 +1,12 @@
-import moment from 'moment-timezone'
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 
+
 import YearPicker from '../components/YearPicker';
+import DriverTable from '../components/DriverTable';
 import {setDrivers} from '../redux/actions';
-import {Table, Flag, Container, Popup} from 'semantic-ui-react'
-import {getCountryCode} from '../utils/utils';
+import {Flag, Container, Popup} from 'semantic-ui-react'
+
 import { currentYear } from '../utils/constants';
 import "./PagesStyle.css";
 
@@ -23,36 +24,7 @@ const Drivers = ({drivers, setDrivers}) => {
             {showYearSelect && <YearPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />}
             {
                 !loadingDrivers && (
-                    <div>
-                        <Table>
-                            <Table.Header>
-                                <Table.Row>
-                                    <Table.HeaderCell>#</Table.HeaderCell>
-                                    <Table.HeaderCell>Nat.</Table.HeaderCell>
-                                    <Table.HeaderCell>First Name</Table.HeaderCell>
-                                    <Table.HeaderCell>Last name</Table.HeaderCell>
-                                    <Table.HeaderCell>Age</Table.HeaderCell>
-                                </Table.Row>
-                            </Table.Header>
-                            {
-                                drivers.Drivers.map((driver) => {
-                                    var date1 = moment();
-                                    var date2 = moment(driver.dateOfBirth);
-                                    var age = date1.diff(date2, 'years');
-                                    return (
-                                        <Table.Row key={driver.driverId}>
-                                            <Table.Cell>{driver.permanentNumber}</Table.Cell>
-                                            <Table.Cell><Popup basic content={driver.nationality} trigger={<Flag name={getCountryCode(driver.nationality)} />} /></Table.Cell>
-                                            <Table.Cell>{driver.givenName}</Table.Cell>
-                                            <Table.Cell>{driver.familyName}</Table.Cell>
-                                            <Table.Cell>{age}</Table.Cell>
-                                        </Table.Row>
-
-                                    )
-                                })
-                            }
-                        </Table>
-                    </div>
+                    <DriverTable drivers={drivers}/>
                 )
             }
         </Container>

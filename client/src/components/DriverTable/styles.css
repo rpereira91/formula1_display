@@ -1,0 +1,12 @@
+.tableBody{
+    font-family: "F1Font";
+    font-size: 1.2em;
+    background-color:rgba(255, 193, 193, 0.151);
+    border-radius: 25px;
+    padding: 0.1em;
+    padding-top: 1em;
+}
+
+.headerRow{
+    text-align: left;
+}
