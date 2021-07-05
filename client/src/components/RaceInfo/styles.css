@@ -1,0 +1,12 @@
+.raceTables {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.table {
+    padding: 1em;
+}
+.raceTableName{
+    display: flex;
+    flex-direction: column;
+}

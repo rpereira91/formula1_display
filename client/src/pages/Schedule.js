@@ -1,33 +1,28 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
 import RaceRow from '../components/RaceRow/index';
 import YearPicker from '../components/YearPicker';
-import { getYearSchedule } from '../utils/api';
+import {setSchedule} from '../redux/actions';
 import {currentYear} from '../utils/constants';
-import { Container, List, Loader, Button} from 'semantic-ui-react'
+import { Container, Loader} from 'semantic-ui-react'
 import './PagesStyle.css'
-const Schedule = () => {
-    const [currentSchedule, setCurrentSchedule] = useState(null)
+const Schedule = ({schedule, setSchedule}) => {
     const [selectedYear, setSelectedYear] = useState(`${currentYear}`)
     const [showYearSelect, setShowYearSelect] = useState(false)
+    const [loadingSchedule, setLoadingSchedule] = useState(true)
     useEffect(() => {
-        getYearSchedule(selectedYear)
-            .then((currentSchedule) => {
-                setCurrentSchedule(currentSchedule)
-            })
-            .catch((e) => {
-                console.log(e)
-            })
+        setSchedule(selectedYear, () => setLoadingSchedule(false))
     }, [selectedYear])
     return (
-        <Container className="pageContainer">
-            { currentSchedule ? (
+        <Container className="pageContainer" fluid>
+            { !loadingSchedule ? (
                 <div>
                     <h1 onClick={() => setShowYearSelect(!showYearSelect)}>Schedule</h1>
                     {showYearSelect && <YearPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />}
                     <h2>Current Season: {selectedYear}</h2>
                     <div>
                         {
-                            currentSchedule['Races'].map((raceInfo, index) => (
+                            schedule['Races'].map((raceInfo, index) => (
                                 <RaceRow raceInfo={raceInfo} key={`race-${index}`}/>
                             ))
                         }
@@ -38,5 +33,5 @@ const Schedule = () => {
         </Container>
     )
 }
-
-export default Schedule
+const mapStateToProps = ({schedule}) => ({schedule});
+export default connect(mapStateToProps, {setSchedule})(Schedule);

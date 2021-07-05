@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { getQualifying, getResults } from '../../utils/api';
-import { Container, Loader, Button, Modal, Header } from 'semantic-ui-react';
+import { Table, Loader, Button, } from 'semantic-ui-react';
+import './styles.css'
 const RaceInfo = ({season, round, url = null}) => {
     const [qualifying, setQualifying] = useState([])
     const [results, setResults] = useState([])
@@ -32,37 +33,108 @@ const RaceInfo = ({season, round, url = null}) => {
         <div>
             {/* <Button onClick={() => setShowModal(true)}>More Info</Button> */}
             {url && <Button onClick={() => window.open(url, "_blank")}>Wiki</Button>}
-            <Container textAlign='left' fluid>
-                Qualifying: {qualifying.length > 0 ? "Complete" : "Incomplete"}
-                {
-                    qualifying.length > 0 && (<div>
-                        Qualifying: {
-                            qualifying.map((race, index) => {
-                                if (index < 5) {
-                                    return (
-                                        <div>{race['Driver']['givenName']} {race['Driver']['familyName']}</div>
-                                    )
+            <div  className="raceTables">
+                <div className="quali table">
+                    Qualifying: {qualifying.length > 0 ? "Complete" : "Incomplete"}
+                    {
+                        qualifying.length > 0 && (
+                            <div>
+                                <Table>
+                                    <Table.Header>
+                                        <Table.Row>
+                                            <Table.HeaderCell rowSpan='2'>Pos.</Table.HeaderCell>
+                                            <Table.HeaderCell rowSpan='2'>Driver</Table.HeaderCell>
+                                            <Table.HeaderCell colSpan='3'>Times</Table.HeaderCell>
+                                        </Table.Row>
+                                        <Table.Row>
+                                            <Table.HeaderCell>Q1</Table.HeaderCell>
+                                            <Table.HeaderCell>Q2</Table.HeaderCell>
+                                            <Table.HeaderCell>Q3</Table.HeaderCell>
+                                        </Table.Row>
+                                    </Table.Header>
+                                    {
+                                        qualifying.map((race, index) => {
+                                            return (
+                                                <Table.Row>
+                                                    <Table.Cell>
+                                                        {race['position']}
+                                                    </Table.Cell>
+                                                    <Table.Cell>
+                                                        <div className="raceTableName">
+                                                            <span>{race['Driver']['givenName']} {race['Driver']['familyName']}</span>
+                                                            <span># {race['number']} {race['Constructor']['name']}</span>
+                                                        </div>
+                                                    </Table.Cell>
+                                                    <Table.Cell>
+                                                        {race['Q1'] && race['Q1']}
+                                                    </Table.Cell>
+                                                    <Table.Cell>
+                                                        {race['Q2'] && race['Q2']}
+                                                    </Table.Cell>
+                                                    <Table.Cell>
+                                                        {race['Q3'] && race['Q3']}
+                                                    </Table.Cell>
+                                                </Table.Row>
+                                            )
+                                        })
+                                    }
+                                </Table>
+                        </div>)
+                    }
+                </div>
+                <div  className="results table">
+                    Race Status: {results.length > 0 ? "Complete" : "Incomplete"}
+                    {
+                        results.length > 0 && (
+                            <div>
+                            <Table>
+                                <Table.Header>
+                                            <Table.Row>
+                                                <Table.HeaderCell rowSpan='2'>Pos.</Table.HeaderCell>
+                                                <Table.HeaderCell rowSpan='2'>Driver</Table.HeaderCell>
+                                                <Table.HeaderCell rowSpan='2'>Laps</Table.HeaderCell>
+                                                <Table.HeaderCell colSpan='3'>Times</Table.HeaderCell>
+                                                <Table.HeaderCell rowSpan='2'>Points</Table.HeaderCell>
+                                            </Table.Row>
+                                            <Table.Row>
+                                                <Table.HeaderCell>Final/Retired</Table.HeaderCell>
+                                                <Table.HeaderCell>Fastest Lap</Table.HeaderCell>
+                                            </Table.Row>
+                                        </Table.Header>
+                                {
+                                    results.map((race, index) => {
+                                        return (
+                                            <Table.Row>
+                                                <Table.Cell>
+                                                    {race['position']}
+                                                </Table.Cell>
+                                                <Table.Cell>
+                                                    <div className="raceTableName">
+                                                        <span>{race['Driver']['givenName']} {race['Driver']['familyName']}</span>
+                                                        <span># {race['number']} {race['Constructor']['name']}</span>
+                                                    </div>
+                                                </Table.Cell>
+                                                <Table.Cell>
+                                                    {race['laps']}
+                                                </Table.Cell>
+                                                <Table.Cell>
+                                                    {race['Time'] ? race['Time']['time'] : race['status']}
+                                                </Table.Cell>
+                                                <Table.Cell>
+                                                    {race['FastestLap'] ? race['FastestLap']['Time']['time'] : 'No Fastest Lap'}
+                                                </Table.Cell>
+                                                <Table.Cell>
+                                                    {race['points'] && race['points']}
+                                                </Table.Cell>
+                                            </Table.Row>
+                                        )
+                                    })
                                 }
-                            })
-                        }
-                    </div>)
-                }
-            </Container>
-            <Container textAlign='right'>Race Status: {results.length > 0 ? "Complete" : "Incomplete"}
-                {
-                    results.length > 0 && (<div>
-                        Results: {
-                            results.map((race, index) => {
-                                if (index < 5) {
-                                    return (
-                                        <div>{race['Driver']['givenName']} {race['Driver']['familyName']}</div>
-                                    )
-                                }
-                            })
-                        }
-                    </div>)
-                }
-            </Container>
+                        </Table>
+                        </div>)
+                    }
+                </div>
+            </div>
         </div>
     ) : <Loader content='Loading races...'/>
 }

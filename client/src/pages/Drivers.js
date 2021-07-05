@@ -1,27 +1,28 @@
 import moment from 'moment-timezone'
 import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+
 import YearPicker from '../components/YearPicker';
-import { getYearDrivers } from '../utils/api'
+import {setDrivers} from '../redux/actions';
 import {Table, Flag, Container, Popup} from 'semantic-ui-react'
 import {getCountryCode} from '../utils/utils';
 import { currentYear } from '../utils/constants';
 import "./PagesStyle.css";
 
-const Drivers = () => {
-    const [drivers, setDrivers] = useState(null)
+const Drivers = ({drivers, setDrivers}) => {
     const [selectedYear, setSelectedYear] = useState(currentYear)
     const [showYearSelect, setShowYearSelect] = useState(false)
+    const [loadingDrivers, setLoadingDrivers] = useState(true)
 
     useEffect(() => {
-        getYearDrivers(selectedYear)
-            .then((drivers) => setDrivers(drivers))
+        setDrivers(selectedYear, () => setLoadingDrivers(false))
     }, [selectedYear])
     return (
         <Container className="pageContainer">
             <h1 onClick={() => setShowYearSelect(!showYearSelect)}>Drivers</h1>
             {showYearSelect && <YearPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />}
             {
-                drivers && (
+                !loadingDrivers && (
                     <div>
                         <Table>
                             <Table.Header>
@@ -38,7 +39,6 @@ const Drivers = () => {
                                     var date1 = moment();
                                     var date2 = moment(driver.dateOfBirth);
                                     var age = date1.diff(date2, 'years');
-                                    console.log(driver.givenName, driver.nationality)
                                     return (
                                         <Table.Row key={driver.driverId}>
                                             <Table.Cell>{driver.permanentNumber}</Table.Cell>
@@ -58,5 +58,5 @@ const Drivers = () => {
         </Container>
     )
 }
-
-export default Drivers
+const mapStateToProps = ({drivers}) => ({drivers});
+export default connect(mapStateToProps, {setDrivers})(Drivers);

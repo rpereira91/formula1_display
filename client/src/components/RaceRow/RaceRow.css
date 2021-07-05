@@ -16,3 +16,7 @@
 .listBody{
     padding: 0em 1em  
 }
+.raceDetails{
+    display: flex;
+    flex-direction: column;
+}

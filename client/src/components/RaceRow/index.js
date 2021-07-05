@@ -16,11 +16,14 @@ const RaceRow = ({raceInfo}) => {
                 
                 <h2 onClick={() => rowInfo()}> <Icon name={"flag checkered"} className={currentIcon ? "icon disabled" : "icon enabled"}/> {raceInfo['raceName']}</h2>
                 <div className="listBody">
-                    <span>Date: {raceInfo['date']}</span>
+                    <div className="raceDetails">
+                        <span>Circut: {raceInfo['Circuit']['circuitName']} </span>
+                        <span>Country: {raceInfo['Circuit']['Location']['country']}</span>
+                        <span>Date: {raceInfo['date']}</span>   
+                    </div>
                     {
                         showRaceInfo && (
                             <>
-                                <div>Circut: {raceInfo['Circuit']['circuitName']} Country:{raceInfo['Circuit']['Location']['country']}</div>
                                 <RaceInfo season={raceInfo['season']} round={ raceInfo['round']} url={raceInfo['url']} />
                             </>
                         )

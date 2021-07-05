@@ -1,5 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { Provider } from 'react-redux'
+import store from './redux/store';
 import Schedule from './pages/Schedule';
 import Drivers from './pages/Drivers';
 import Home from './pages/Home';
@@ -12,14 +14,16 @@ import { Container } from 'semantic-ui-react'
 function App() {
 
   return (
-    <Router>
-    <Container>
-      <NavBar />
-      <Route exact path={PATHS.HOME.route} component={Home} />
-      <Route path={PATHS.SCHEDULE.route} component={Schedule} />
-      <Route path={PATHS.DRIVERS.route} component={Drivers} />
-    </Container>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Container fluid>
+          <NavBar />
+          <Route exact path={PATHS.HOME.route} component={Home} />
+          <Route path={PATHS.SCHEDULE.route} component={Schedule} />
+          <Route path={PATHS.DRIVERS.route} component={Drivers} />
+        </Container>
+      </Router>
+    </Provider>
   );
 }
 
