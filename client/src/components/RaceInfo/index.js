@@ -61,7 +61,7 @@ const RaceInfo = ({season, round, url = null}) => {
                                                     </Table.Cell>
                                                     <Table.Cell>
                                                         <div className="raceTableName">
-                                                            <span>{race['Driver']['givenName']} {race['Driver']['familyName']}</span>
+                                                            <span>{race['Driver']['givenName'][0]}. {race['Driver']['familyName']}</span>
                                                             <span># {race['number']} {race['Constructor']['name']}</span>
                                                         </div>
                                                     </Table.Cell>
@@ -93,7 +93,7 @@ const RaceInfo = ({season, round, url = null}) => {
                                                 <Table.HeaderCell rowSpan='2'>Pos.</Table.HeaderCell>
                                                 <Table.HeaderCell rowSpan='2'>Driver</Table.HeaderCell>
                                                 <Table.HeaderCell rowSpan='2'>Laps</Table.HeaderCell>
-                                                <Table.HeaderCell colSpan='3'>Times</Table.HeaderCell>
+                                                <Table.HeaderCell colSpan='2'>Times</Table.HeaderCell>
                                                 <Table.HeaderCell rowSpan='2'>Points</Table.HeaderCell>
                                             </Table.Row>
                                             <Table.Row>
@@ -110,7 +110,7 @@ const RaceInfo = ({season, round, url = null}) => {
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <div className="raceTableName">
-                                                        <span>{race['Driver']['givenName']} {race['Driver']['familyName']}</span>
+                                                        <span>{race['Driver']['givenName'][0]}. {race['Driver']['familyName']}</span>
                                                         <span># {race['number']} {race['Constructor']['name']}</span>
                                                     </div>
                                                 </Table.Cell>
