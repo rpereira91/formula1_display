@@ -1,8 +1,10 @@
 .pageContainer{
     background-color: #808080;
     padding: 1em;
+    font-family: "F1Font";
+    color: black;
     
 }
-.ui.segment {
-    margin: 0em
+.title{
+    font-size: 2em;
 }

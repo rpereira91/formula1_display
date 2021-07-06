@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { getQualifying, getResults } from '../../utils/api';
-import { Table, Loader, Button, } from 'semantic-ui-react';
+import { Table, Loader, } from 'semantic-ui-react';
+import {Row, Container, Col, Button} from 'shards-react'
 import './styles.css'
 const RaceInfo = ({season, round, url = null}) => {
     const [qualifying, setQualifying] = useState([])
@@ -30,11 +31,12 @@ const RaceInfo = ({season, round, url = null}) => {
 
     }, [season, round])
     return !loading ? (
-        <div>
-            {/* <Button onClick={() => setShowModal(true)}>More Info</Button> */}
-            {url && <Button onClick={() => window.open(url, "_blank")}>Wiki</Button>}
-            <div  className="raceTables">
-                <div className="quali table">
+        <Container fluid>
+            <Row noGutters>
+                {url && <Button theme="light" size="sm" onClick={() => window.open(url, "_blank")}>Wiki</Button>}
+            </Row>
+            <Row  className="raceTables">
+                <Col sm="12" lg="6" className="quali table">
                     Qualifying: {qualifying.length > 0 ? "Complete" : "Incomplete"}
                     {
                         qualifying.length > 0 && (
@@ -81,8 +83,8 @@ const RaceInfo = ({season, round, url = null}) => {
                                 </Table>
                         </div>)
                     }
-                </div>
-                <div  className="results table">
+                </Col>
+                <Col sm="12" lg="6"  className="results table">
                     Race Status: {results.length > 0 ? "Complete" : "Incomplete"}
                     {
                         results.length > 0 && (
@@ -133,9 +135,9 @@ const RaceInfo = ({season, round, url = null}) => {
                         </Table>
                         </div>)
                     }
-                </div>
-            </div>
-        </div>
+                </Col>
+            </Row>
+        </Container>
     ) : <Loader content='Loading races...'/>
 }
 

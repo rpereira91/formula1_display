@@ -3,8 +3,8 @@
     font-family: "F1Font";
 }
 
-.nextRace {
-    background-color: aqua;
+.raceTitle {
+    font-size: 1.5em;
 }
 .icon.enabled {
     color: green;
@@ -19,4 +19,5 @@
 .raceDetails{
     display: flex;
     flex-direction: column;
+    padding-left: 1em;
 }

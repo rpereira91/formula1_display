@@ -1,9 +1,8 @@
 import React from 'react'
-import {Flag, Popup} from 'semantic-ui-react'
+import Flag from 'react-world-flags'
 import moment from 'moment-timezone'
 import {getCountryCode} from '../../utils/utils';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import "./styles.css"
 const DriverTable = ({drivers}) => {
     return (
@@ -27,7 +26,13 @@ const DriverTable = ({drivers}) => {
                                 return (
                                     <Tr key={driver.driverId}>
                                         <Td>{driver.permanentNumber}</Td>
-                                        <Td><Popup basic content={driver.nationality} trigger={<Flag name={getCountryCode(driver.nationality)} />} /></Td>
+                                        <Td>
+                                            <Flag 
+                                                code={getCountryCode(driver.nationality)}
+                                                height="16"
+                                                fallback={driver.nationality}
+                                            />
+                                        </Td>
                                         <Td>{driver.givenName}</Td>
                                         <Td>{driver.familyName}</Td>
                                         <Td>{age}</Td>

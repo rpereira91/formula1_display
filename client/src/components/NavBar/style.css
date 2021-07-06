@@ -3,3 +3,10 @@
     color: red;
     font-family: "F1Font";
 }
+.headerImage{
+    height: auto;
+    width: 3em;
+}
+.navBar{
+    padding: 0px !important;
+}

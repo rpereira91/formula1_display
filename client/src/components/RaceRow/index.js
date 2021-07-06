@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import { Icon } from 'semantic-ui-react'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFlagCheckered } from "@fortawesome/free-solid-svg-icons";
 import RaceInfo from '../RaceInfo'
 
 import './RaceRow.css'
@@ -14,7 +15,7 @@ const RaceRow = ({raceInfo}) => {
         <div className="listRow">
             <div className="listContent">
                 
-                <h2 onClick={() => rowInfo()}> <Icon name={"flag checkered"} className={currentIcon ? "icon disabled" : "icon enabled"}/> {raceInfo['raceName']}</h2>
+                <span className="raceTitle" onClick={() => rowInfo()}> <FontAwesomeIcon icon={faFlagCheckered} className={currentIcon ? "icon disabled" : "icon enabled"}/> {raceInfo['raceName']}</span>
                 <div className="listBody">
                     <div className="raceDetails">
                         <span>Circut: {raceInfo['Circuit']['circuitName']} </span>

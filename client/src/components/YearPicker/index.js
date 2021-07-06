@@ -1,9 +1,10 @@
 import React from 'react'
 import Datetime from 'react-datetime';
 import moment from 'moment';
-import { Container, Button} from 'semantic-ui-react'
-
+import { Container, Button, Row, Col} from 'shards-react'
 import { currentYear } from '../../utils/constants';
+
+import "./styles.css"
 
 const YearPicker = ({selectedYear, setSelectedYear}) => {
     const valid = ( current ) => {
@@ -11,16 +12,24 @@ const YearPicker = ({selectedYear, setSelectedYear}) => {
         return !current.isAfter( yesterday );
     };
     return (
-        <Container>
-            <Datetime 
-                dateFormat="YYYY" 
-                timeFormat={false}
-                value={`${selectedYear}`}
-                onChange={(date) => {setSelectedYear(`${date.year()}`)}}
-                input={false}
-                isValidDate={ valid }
-            />
-            {selectedYear !== `${currentYear}` && <Button onClick={() => setSelectedYear(`${currentYear}`)}>Set to current year</Button>}
+        <Container fluid className="pickerContainer">
+            <Row>
+                <Col sm="12" md="4" lg="3">
+                    {`${selectedYear}` !== `${currentYear}` && <Button theme="primary" size="sm"  onClick={() => setSelectedYear(`${currentYear}`)}>Set to current year</Button>}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Datetime 
+                        dateFormat="YYYY" 
+                        timeFormat={false}
+                        value={`${selectedYear}`}
+                        onChange={(date) => {setSelectedYear(`${date.year()}`)}}
+                        input={false}
+                        isValidDate={ valid }
+                    />
+                </Col>
+            </Row>
         </Container>
     )
 }
