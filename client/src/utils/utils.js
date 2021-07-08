@@ -7,3 +7,8 @@ export const getCountryCode = (country) => {
         return null;
     }
 }
+
+export const getWikiUrl = (url) => {
+    const search = url.split('/').pop() 
+    return search
+}

@@ -1,0 +1,50 @@
+.infoCard{
+    margin: 1.5em;
+    height: 17em;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 25px;
+    border-width: 2px 2px 0px 0px;
+    border-style: solid solid inset double;
+    border-color: #000000 #000000 #fff #fff;
+}
+.infoCard:hover {
+    border-color: #f00 #f00 #fff #fff;
+    top: -1em;
+}
+.roundInfo {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    background-color: #fff;
+    padding: 0px 3px 0px 20px;
+    font-size: larger;
+    color: #f00;
+}
+.dateContainer {
+    padding: 2em 1em 0em 1em;
+    display: flex;
+    flex-direction: column;
+}
+.infoContainer {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+}
+.footerButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0.5em 1em;
+}
+.boldLarge{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+div.solid {
+    border-top: 1px solid #bbb;
+    width: 80%;
+    margin-top: 0.5em ;
+    margin-left: 10%;
+  }
