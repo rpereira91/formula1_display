@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import RaceRow from '../components/RaceRow/index';
+import GrandPrixCard from '../components/GrandPrixCard';
 import YearPicker from '../components/YearPicker';
 import {setSchedule} from '../redux/actions';
 import {currentYear} from '../utils/constants';
@@ -29,8 +30,9 @@ const Schedule = ({schedule, setSchedule}) => {
                     <Row>
                         {
                             schedule['Races'].map((raceInfo, index) => (
-                                <Col sm="12" lg="12">
-                                    <RaceRow raceInfo={raceInfo} key={`race-${index}`}/>
+                                <Col sm="12" md="6" lg="3">
+                                    <GrandPrixCard raceInfo={raceInfo} key={`race-${index}`}/>
+                                    {/* <RaceRow raceInfo={raceInfo} key={`race-${index}`}/> */}
                                 </Col>
                             ))
                         }
