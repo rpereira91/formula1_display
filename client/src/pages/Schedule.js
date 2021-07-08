@@ -4,7 +4,8 @@ import RaceRow from '../components/RaceRow/index';
 import YearPicker from '../components/YearPicker';
 import {setSchedule} from '../redux/actions';
 import {currentYear} from '../utils/constants';
-import { Container, Loader} from 'semantic-ui-react'
+import { Loader} from 'semantic-ui-react';
+import {Container, Row, Col} from 'shards-react'
 import './PagesStyle.css'
 const Schedule = ({schedule, setSchedule}) => {
     const [selectedYear, setSelectedYear] = useState(`${currentYear}`)
@@ -16,18 +17,25 @@ const Schedule = ({schedule, setSchedule}) => {
     return (
         <Container className="pageContainer" fluid>
             { !loadingSchedule ? (
-                <div>
-                    <h1 onClick={() => setShowYearSelect(!showYearSelect)}>Schedule</h1>
-                    {showYearSelect && <YearPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />}
-                    <h2>Current Season: {selectedYear}</h2>
-                    <div>
+                <Container fluid>
+                    <Row>
+                        <span className="title" onClick={() => setShowYearSelect(!showYearSelect)}>Schedule</span>
+                        {showYearSelect && <YearPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />}
+                        
+                    </Row>
+                    <Row>
+                        <span>Season: {selectedYear}</span>
+                    </Row>
+                    <Row>
                         {
                             schedule['Races'].map((raceInfo, index) => (
-                                <RaceRow raceInfo={raceInfo} key={`race-${index}`}/>
+                                <Col sm="12" lg="12">
+                                    <RaceRow raceInfo={raceInfo} key={`race-${index}`}/>
+                                </Col>
                             ))
                         }
-                    </div>
-                </div>
+                    </Row>
+                </Container>
             ) : <Loader content='Loading races...'/>
             }
         </Container>

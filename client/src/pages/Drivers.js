@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import YearPicker from '../components/YearPicker';
 import DriverTable from '../components/DriverTable';
 import {setDrivers} from '../redux/actions';
-import {Flag, Container, Popup} from 'semantic-ui-react'
+import {Container} from 'shards-react'
 
 import { currentYear } from '../utils/constants';
 import "./PagesStyle.css";
@@ -19,7 +19,7 @@ const Drivers = ({drivers, setDrivers}) => {
         setDrivers(selectedYear, () => setLoadingDrivers(false))
     }, [selectedYear])
     return (
-        <Container className="pageContainer">
+        <Container className="pageContainer" fluid>
             <h1 onClick={() => setShowYearSelect(!showYearSelect)}>Drivers</h1>
             {showYearSelect && <YearPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />}
             {
