@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const getCurrentSchedule = () => {
-    return axios.get('http://ergast.com/api/f1/current.json')
+export const getNextRace = () => {
+    return axios.get('http://ergast.com/api/f1/current/next.json')
       .then(({data: {MRData:{RaceTable}}}) => RaceTable)
       .catch((e) => console.log(e))
 }
