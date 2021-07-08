@@ -1,10 +1,24 @@
 import React from 'react'
 import Flag from 'react-world-flags'
 import moment from 'moment-timezone'
+import DriverCard from '../DriverCard'
 import {getCountryCode} from '../../utils/utils';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import {Container, Row, Col} from 'shards-react'
+
 import "./styles.css"
 const DriverTable = ({drivers}) => {
+    return (
+        <Row>
+            {
+                drivers.Drivers.map((driver) => (
+                    <Col sm="12" md="6" lg="3">
+                        <DriverCard driverInfo={driver}/>
+                    </Col>
+                ))
+            }
+        </Row>
+    )
     return (
             <div className="tableBody">
                 <Table>

@@ -4,6 +4,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     border-top-right-radius: 25px;
     border-width: 2px 2px 0px 0px;
     border-style: solid solid inset double;
@@ -11,6 +12,7 @@
 }
 .infoCard:hover {
     border-color: #f00 #f00 #fff #fff;
+    height: 17em;
     top: -1em;
 }
 .roundInfo {
