@@ -1,5 +1,6 @@
 import React from 'react'
-import {Row} from 'shards-react'
+import {Row, Container} from 'shards-react'
+import "./NextRace.css";
 
 export const NextRace = ({nextRace}) => {
     const race = nextRace.Races[0];
@@ -9,8 +10,10 @@ export const NextRace = ({nextRace}) => {
 
     return (
         <Row>
-            <span>Round {nextRace.round}-up next</span>
-            <span>{raceName} at {circuitName}</span>
+            <div fluid className="raceContainer">
+                <span className="upNext">Round {nextRace.round}-up next</span>
+                <span>{raceName} at {circuitName}</span>
+            </div>
         </Row>
     )
 }

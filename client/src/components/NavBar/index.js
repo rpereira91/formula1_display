@@ -22,7 +22,7 @@ const NavBar = () => {
     const [collapseOpen, setCollapseOpen] = useState(false)
     const handleItemClick = ({target:{pathname}}) => setActiveItem(getRoute(pathname))
     return (
-        <Container fluid className="navBar">
+        <div fluid className="navBar">
             <Navbar type="dark" theme="secondary" expand="md" >
             <NavbarBrand tag={Link} to={PATHS.HOME.route}>
                 <img src="images/formula-1-logo.png" className="headerImage" alt="logo"/><span className="header">Formula 1</span>
@@ -58,7 +58,7 @@ const NavBar = () => {
             </Nav>
             </Collapse>
             </Navbar>
-        </Container>
+        </div>
     )
 }
 
