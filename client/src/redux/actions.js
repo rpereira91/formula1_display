@@ -1,11 +1,17 @@
-import { SET_SCHEDULE, SET_DRIVERS } from "./types";
-import {getYearSchedule, getYearDrivers} from '../utils/api';
+import { SET_SCHEDULE, SET_DRIVERS, SET_NEXT_RACE } from "./types";
+import {getYearSchedule, getYearDrivers, getNextRace} from '../utils/api';
 
 export const setSchedule = (year, completeCallback = () => {}) => (dispatch) => {
     getYearSchedule(year)
         .then((currentSchedule) => {
             dispatch({type: SET_SCHEDULE, payload: currentSchedule})
-            completeCallback();
+        })
+        .then(() => {
+            getNextRace()
+                .then((nextRace) => {
+                    dispatch({type: SET_NEXT_RACE, payload: nextRace})
+                    completeCallback();
+                    })
         })
         .catch((e) => {
             console.log(e)

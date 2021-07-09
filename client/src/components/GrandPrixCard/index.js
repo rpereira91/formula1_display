@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, ButtonGroup } from "shards-react";
+import {Button } from "shards-react";
 import moment from 'moment'
 import "./styles.css";
 const GrandPrixCard = ({raceInfo}) => {
@@ -28,7 +28,7 @@ const GrandPrixCard = ({raceInfo}) => {
             <div className="solid"/>
             <div className="footerButtons">
                 <Button outline theme="success" onClick={() => window.open(url, "_blank")}>Wiki</Button>
-                <Button outline theme="light">Race Info</Button>
+                <Button outline theme="light" >Race Info</Button>
             </div >
         </div>
     )

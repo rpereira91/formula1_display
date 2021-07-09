@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {connect} from 'react-redux';
-import RaceRow from '../components/RaceRow/index';
+import {NextRace, NextRaceHeader} from '../components/NextRace';
 import GrandPrixCard from '../components/GrandPrixCard';
 import YearPicker from '../components/YearPicker';
 import {setSchedule} from '../redux/actions';
@@ -8,13 +8,15 @@ import {currentYear} from '../utils/constants';
 import { Loader} from 'semantic-ui-react';
 import {Container, Row, Col} from 'shards-react'
 import './PagesStyle.css'
-const Schedule = ({schedule, setSchedule}) => {
-    const [selectedYear, setSelectedYear] = useState(`${currentYear}`)
-    const [showYearSelect, setShowYearSelect] = useState(false)
-    const [loadingSchedule, setLoadingSchedule] = useState(true)
+const Schedule = ({schedule, setSchedule, nextRace}) => {
+    const [selectedYear, setSelectedYear] = useState(`${currentYear}`);
+    const [showYearSelect, setShowYearSelect] = useState(false);
+    const [loadingSchedule, setLoadingSchedule] = useState(true);
+    const nextRaceRef = useRef(null);
     useEffect(() => {
         setSchedule(selectedYear, () => setLoadingSchedule(false))
     }, [selectedYear])
+    const executeScroll = () => nextRaceRef.current.scrollIntoView()
     return (
         <Container className="pageContainer" fluid>
             { !loadingSchedule ? (
@@ -22,6 +24,7 @@ const Schedule = ({schedule, setSchedule}) => {
                     <Row>
                         <span className="title" onClick={() => setShowYearSelect(!showYearSelect)}>Schedule</span>
                         {showYearSelect && <YearPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />}
+                        <NextRaceHeader onClick={executeScroll} round={nextRace.round} raceName={nextRace.Races[0].raceName} season={nextRace.season}/>
                         
                     </Row>
                     <Row>
@@ -29,12 +32,24 @@ const Schedule = ({schedule, setSchedule}) => {
                     </Row>
                     <Row>
                         {
-                            schedule['Races'].map((raceInfo, index) => (
-                                <Col sm="12" md="6" lg="3">
-                                    <GrandPrixCard raceInfo={raceInfo} key={`race-${index}`}/>
-                                    {/* <RaceRow raceInfo={raceInfo} key={`race-${index}`}/> */}
-                                </Col>
-                            ))
+                            schedule['Races'].map((raceInfo, index) => {
+                                const currentRound = raceInfo['round']
+                                const nextRound = nextRace['round']
+                                if (currentRound === nextRound) {
+                                    return (
+                                        <Col sm="12" md="12" lg="12" >
+                                            <div ref={nextRaceRef}>
+                                                <NextRace nextRace={nextRace}/>
+                                            </div>
+                                        </Col>
+                                    )
+                                }
+                                return (
+                                    <Col sm="12" md="6" lg="3">
+                                        <GrandPrixCard nextRace={nextRace} raceInfo={raceInfo} key={`race-${index}`}/>
+                                    </Col>
+                                )
+                        })
                         }
                     </Row>
                 </Container>
@@ -43,5 +58,6 @@ const Schedule = ({schedule, setSchedule}) => {
         </Container>
     )
 }
-const mapStateToProps = ({schedule}) => ({schedule});
+
+const mapStateToProps = ({schedule, nextRace}) => ({schedule, nextRace});
 export default connect(mapStateToProps, {setSchedule})(Schedule);

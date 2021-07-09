@@ -1,8 +1,9 @@
-import { SET_SCHEDULE, SET_DRIVERS } from "./types";
+import { SET_SCHEDULE, SET_DRIVERS, SET_NEXT_RACE } from "./types";
 
 
 const INITAL_STATE = {
     schedule: {}, 
+    nextRace: {},
     drivers: {},
 }
 
@@ -17,6 +18,11 @@ const f1Reducer = (state = INITAL_STATE, action) => {
             return {
                 ...state, 
                 drivers: action.payload,
+            }
+        case SET_NEXT_RACE:
+            return {
+                ...state, 
+                nextRace: action.payload,
             }
         default:
             return state;
