@@ -6,6 +6,12 @@ export const getNextRace = () => {
       .catch((e) => console.log(e))
 }
 
+export const getLastRace = () => {
+    return axios.get('http://ergast.com/api/f1/current/last.json')
+      .then(({data: {MRData:{RaceTable}}}) => RaceTable)
+      .catch((e) => console.log(e))
+}
+
 export const getYearSchedule = (year) => {
     return axios.get(`http://ergast.com/api/f1/${year}.json`)
         .then(({data: {MRData:{RaceTable}}}) => RaceTable)
