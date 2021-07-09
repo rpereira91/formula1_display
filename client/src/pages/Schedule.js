@@ -4,7 +4,7 @@ import {NextRace, NextRaceHeader} from '../components/NextRace';
 import GrandPrixCard from '../components/GrandPrixCard';
 import YearPicker from '../components/YearPicker';
 import {setSchedule} from '../redux/actions';
-import {currentYear} from '../utils/constants';
+import {currentYear, onCurrentYear} from '../utils/constants';
 import { Loader} from 'semantic-ui-react';
 import {Container, Row, Col} from 'shards-react'
 import './PagesStyle.css'
@@ -24,7 +24,7 @@ const Schedule = ({schedule, setSchedule, nextRace}) => {
                     <Row>
                         <span className="title" onClick={() => setShowYearSelect(!showYearSelect)}>Schedule</span>
                         {showYearSelect && <YearPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />}
-                        <NextRaceHeader onClick={executeScroll} round={nextRace.round} raceName={nextRace.Races[0].raceName} season={nextRace.season}/>
+                        {onCurrentYear(selectedYear) && <NextRaceHeader onClick={executeScroll} round={nextRace.round} raceName={nextRace.Races ? nextRace.Races[0].raceName : ''} season={nextRace.season}/>}
                         
                     </Row>
                     <Row>
@@ -35,7 +35,7 @@ const Schedule = ({schedule, setSchedule, nextRace}) => {
                             schedule['Races'].map((raceInfo, index) => {
                                 const currentRound = raceInfo['round']
                                 const nextRound = nextRace['round']
-                                if (currentRound === nextRound) {
+                                if (currentRound === nextRound && onCurrentYear(selectedYear)) {
                                     return (
                                         <Col sm="12" md="12" lg="12" >
                                             <div ref={nextRaceRef}>

@@ -1,30 +1,27 @@
 import { SET_SCHEDULE, SET_DRIVERS, SET_NEXT_RACE } from "./types";
 import {getYearSchedule, getYearDrivers, getNextRace} from '../utils/api';
-
-export const setRaceInfo = () => (dispatch) => {
-
-}
-
-export const setSchedule = (year, completeCallback = () => {}) => (dispatch,getState) => {
-    const {schedule} = getState();
-    if (schedule.season && schedule.season !== year){
-        getYearSchedule(year)
-            .then((currentSchedule) => {
-                dispatch({type: SET_SCHEDULE, payload: currentSchedule})
-            })
-            .then(() => {
-                getNextRace()
+import {onCurrentYear} from '../utils/constants'
+export const setSchedule = (year, completeCallback = () => {}) => (dispatch) => {
+    getYearSchedule(year)
+        .then((currentSchedule) => {
+            dispatch({type: SET_SCHEDULE, payload: currentSchedule})
+        })
+        .then(() => {
+            if(onCurrentYear(year))
+                {
+                    getNextRace()
                     .then((nextRace) => {
-                        dispatch({type: SET_NEXT_RACE, payload: nextRace})
-                        completeCallback();
-                        })
+                        dispatch({type: SET_NEXT_RACE, payload: nextRace});
+                    })
+                }
             })
-            .catch((e) => {
-                console.log(e)
-            })
-    } else {
-        completeCallback ()
-    }
+        .then(() => {
+                completeCallback();
+                
+        })
+        .catch((e) => {
+            console.log(e)
+        })
 }
 
 export const setDrivers = (year, completeCallback = () => {}) => (dispatch) => {

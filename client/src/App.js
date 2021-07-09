@@ -21,7 +21,7 @@ function App() {
         <NavBar />
           <Suspense fallback={<Loading />}>
             <Switch>
-            <Container fluid>
+            <Container fluid className="pages">
               <Route exact path={PATHS.HOME.route} component={Home} />
               <Route path={PATHS.SCHEDULE.route} component={Schedule} />
               <Route path={PATHS.DRIVERS.route} component={Drivers} />
