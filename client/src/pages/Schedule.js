@@ -24,7 +24,7 @@ const Schedule = ({schedule, setSchedule, nextRace}) => {
                     <Row>
                         <span className="title" onClick={() => setShowYearSelect(!showYearSelect)}>Schedule</span>
                         {showYearSelect && <YearPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />}
-                        {onCurrentYear(selectedYear) && <NextRaceHeader onClick={executeScroll} round={nextRace.round} raceName={nextRace.Races[0].raceName} season={nextRace.season}/>}
+                        {onCurrentYear(selectedYear) && <NextRaceHeader onClick={executeScroll} round={nextRace.round} raceName={nextRace.Races ? nextRace.Races[0].raceName : ''} season={nextRace.season}/>}
                         
                     </Row>
                     <Row>

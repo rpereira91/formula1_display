@@ -1,7 +1,10 @@
 export const PATHS = {
     HOME: {route:'/', name:'home'},
     SCHEDULE: {route:'/schedule', name:'schedule'},
-    DRIVERS: {route: '/drivers', name: 'drivers'}
+    DRIVERS: {route: '/drivers', name: 'drivers'},
+    RACE: {route: '/race/:round/:season/', name: 'race'},
+    RACE_NO_PARAMS: {route: '/race', name: 'race'}
+
 }
 
 export const getRoute= (pathname) => {
