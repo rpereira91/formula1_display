@@ -1,4 +1,4 @@
-import { SET_SCHEDULE, SET_DRIVERS, SET_NEXT_RACE } from "./types";
+import { SET_SCHEDULE, SET_DRIVERS, SET_NEXT_RACE, SET_RACE } from "./types";
 import {getYearSchedule, getYearDrivers, getNextRace} from '../utils/api';
 import {onCurrentYear} from '../utils/constants'
 export const setSchedule = (year, completeCallback = () => {}) => (dispatch) => {

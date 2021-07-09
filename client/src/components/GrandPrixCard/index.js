@@ -2,6 +2,8 @@ import React from 'react'
 import {Button } from "shards-react";
 import moment from 'moment'
 import "./styles.css";
+import { Link } from 'react-router-dom'
+
 const GrandPrixCard = ({raceInfo}) => {
     const raceStart = moment(raceInfo['date']).subtract(2, 'day');
     const raceEnd = moment(raceInfo['date']);
@@ -28,7 +30,7 @@ const GrandPrixCard = ({raceInfo}) => {
             <div className="solid"/>
             <div className="footerButtons">
                 <Button outline theme="success" onClick={() => window.open(url, "_blank")}>Wiki</Button>
-                <Button outline theme="light" >Race Info</Button>
+                <Button outline theme="light" tag={Link} to={`/race/${raceRound}/${raceInfo['season']}`}>Race Info</Button>
             </div >
         </div>
     )

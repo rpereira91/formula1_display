@@ -7,4 +7,27 @@
 }
 .title{
     font-size: 2em;
+    text-emphasis: bold;
+}
+.subTitle{
+    font-size: 1.5em;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {background-color: #f2f2f2;}
+
+.raceTableName{
+    display: flex;
+    flex-direction: column;
+}
+.currentRound{
+    overflow-x:auto;
 }

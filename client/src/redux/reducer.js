@@ -1,10 +1,11 @@
-import { SET_SCHEDULE, SET_DRIVERS, SET_NEXT_RACE } from "./types";
+import { SET_SCHEDULE, SET_DRIVERS, SET_NEXT_RACE, SET_RACE } from "./types";
 
 
 const INITAL_STATE = {
     schedule: {}, 
     nextRace: {},
     drivers: {},
+    races:{}
 }
 
 const f1Reducer = (state = INITAL_STATE, action) => {
