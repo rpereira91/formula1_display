@@ -5,7 +5,7 @@ const INITAL_STATE = {
     schedule: {}, 
     nextRace: {},
     drivers: {},
-    races:{}
+    races:{qualifying: [], results: [],}
 }
 
 const f1Reducer = (state = INITAL_STATE, action) => {
@@ -24,6 +24,11 @@ const f1Reducer = (state = INITAL_STATE, action) => {
             return {
                 ...state, 
                 nextRace: action.payload,
+            }
+        case SET_RACE:
+            return {
+                ...state, 
+                races: {...state.races, ...action.payload}
             }
         default:
             return state;

@@ -1,33 +1,21 @@
-.pageContainer{
-    background-color: #ffffff;
-    padding: 1em;
-    font-family: "F1Font";
-    color: black;
-    
+.pageContainer {
+  background-color: #ffffff;
+  padding: 1em;
+  font-family: "F1Font";
+  color: black;
 }
-.title{
-    font-size: 2em;
-    text-emphasis: bold;
+.title {
+  font-size: 2em;
+  text-emphasis: bold;
 }
-.subTitle{
-    font-size: 1.5em;
+.subTitle {
+  font-size: 1.5em;
 }
-table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  th, td {
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {background-color: #f2f2f2;}
 
-.raceTableName{
-    display: flex;
-    flex-direction: column;
+.currentRound {
+  overflow-x: auto;
 }
-.currentRound{
-    overflow-x:auto;
+.rowHeader {
+  display: flex;
+  justify-content: space-between;
 }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import {connect} from 'react-redux';
 import {NextRace, NextRaceHeader} from '../components/NextRace';
 import GrandPrixCard from '../components/GrandPrixCard';
@@ -12,16 +12,23 @@ const Schedule = ({schedule, setSchedule, nextRace}) => {
     const [selectedYear, setSelectedYear] = useState(`${currentYear}`);
     const [showYearSelect, setShowYearSelect] = useState(false);
     const [loadingSchedule, setLoadingSchedule] = useState(true);
+    // use call back to get a memoized set schedule to be used whenever the selected year gets updated
+    const setScheduleCallback = useCallback(
+        () => {
+            setSchedule(selectedYear, () => setLoadingSchedule(false))
+        },
+        [selectedYear, setSchedule],
+    )
     const nextRaceRef = useRef(null);
     useEffect(() => {
-        setSchedule(selectedYear, () => setLoadingSchedule(false))
-    }, [selectedYear])
+        setScheduleCallback()
+    }, [setScheduleCallback])
     const executeScroll = () => nextRaceRef.current.scrollIntoView()
     return (
         <Container className="pageContainer" fluid>
             { !loadingSchedule ? (
                 <Container fluid>
-                    <Row>
+                    <Row className="rowHeader">
                         <span className="title" onClick={() => setShowYearSelect(!showYearSelect)}>Schedule</span>
                         {showYearSelect && <YearPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />}
                         {onCurrentYear(selectedYear) && <NextRaceHeader onClick={executeScroll} round={nextRace.round} raceName={nextRace.Races ? nextRace.Races[0].raceName : ''} season={nextRace.season}/>}

@@ -1,11 +1,15 @@
 .raceContainer {
-    background-color: #8f8f8f;
-    width: 100%;
-    height: 10em;
-    display: flex;
-    flex-direction: column;
+  background-color: #8f8f8f;
+  width: 100%;
+  height: 10em;
+  display: flex;
+  flex-direction: column;
 }
 .upNext {
-    font-size: larger;
-    color: red;
+  font-size: larger;
+  color: red;
+}
+.nextRaceHeader {
+  display: flex;
+  flex-flow: column;
 }

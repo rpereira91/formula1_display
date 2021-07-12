@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {connect} from 'react-redux';
 
 
@@ -14,10 +14,15 @@ const Drivers = ({drivers, setDrivers}) => {
     const [selectedYear, setSelectedYear] = useState(currentYear)
     const [showYearSelect, setShowYearSelect] = useState(false)
     const [loadingDrivers, setLoadingDrivers] = useState(true)
-    console.log(drivers)
+    const setDriversCallback = useCallback(
+        () => {
+            setDrivers(selectedYear, () => setLoadingDrivers(false))
+        },
+        [selectedYear, setDrivers],
+    )
     useEffect(() => {
-        setDrivers(selectedYear, () => setLoadingDrivers(false))
-    }, [selectedYear])
+        setDriversCallback()
+    }, [selectedYear, setDriversCallback])
     return (
         <Container className="pageContainer" fluid>
             <h1 onClick={() => setShowYearSelect(!showYearSelect)}>Drivers</h1>
