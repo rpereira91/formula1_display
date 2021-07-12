@@ -8,7 +8,7 @@ export const PATHS = {
 }
 
 export const getRoute= (pathname) => {
-    if (pathname === PATHS.HOME.route) return PATHS.HOME.name
+    if (pathname === PATHS.HOME.route) return '/'
     else return pathname.substr(1)
 }
 

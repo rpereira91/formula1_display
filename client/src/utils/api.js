@@ -35,3 +35,9 @@ export const getResults = (season=2000, round=1) => {
       .then(({data: {MRData:{RaceTable}}}) => RaceTable)
       .catch((e) => console.log(e))
 }
+
+export const getStandings = (season=2000,) => {
+    return axios.get(`http://ergast.com/api/f1/${season}/driverStandings.json`)
+      .then(({data: {MRData:{StandingsTable}}}) => StandingsTable)
+      .catch((e) => console.log(e))
+}

@@ -11,7 +11,7 @@ const DriverTable = ({drivers}) => {
     return (
         <Row>
             {
-                drivers.Drivers.map((driver) => (
+                drivers.map((driver) => (
                     <Col sm="12" md="6" lg="3">
                         <DriverCard driverInfo={driver}/>
                     </Col>
@@ -41,11 +41,7 @@ const DriverTable = ({drivers}) => {
     //                                 <Tr key={driver.driverId}>
     //                                     <Td>{driver.permanentNumber}</Td>
     //                                     <Td>
-    //                                         <Flag 
-    //                                             code={getCountryCode(driver.nationality)}
-    //                                             height="16"
-    //                                             fallback={driver.nationality}
-    //                                         />
+
     //                                     </Td>
     //                                     <Td>{driver.givenName}</Td>
     //                                     <Td>{driver.familyName}</Td>

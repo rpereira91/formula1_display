@@ -1,5 +1,5 @@
 import { SET_SCHEDULE, SET_DRIVERS, SET_NEXT_RACE, SET_RACE } from "./types";
-import {getYearSchedule, getYearDrivers, getNextRace} from '../utils/api';
+import {getYearSchedule, getStandings, getNextRace} from '../utils/api';
 import {onCurrentYear} from '../utils/constants'
 export const setSchedule = (year, completeCallback = () => {}) => (dispatch) => {
     getYearSchedule(year)
@@ -25,9 +25,12 @@ export const setSchedule = (year, completeCallback = () => {}) => (dispatch) => 
 }
 
 export const setDrivers = (year, completeCallback = () => {}) => (dispatch) => {
-    getYearDrivers(year)
-        .then((drivers) => {
-            dispatch({type: SET_DRIVERS, payload: drivers})
+    getStandings(year)
+        .then((standings) => {
+            if (standings['StandingsLists'].length > 0){
+                dispatch({type: SET_DRIVERS, payload: standings['StandingsLists'][0]['DriverStandings']})
+
+            }
             completeCallback();
         })
         .catch((e) => {

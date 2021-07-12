@@ -14,7 +14,7 @@ const Drivers = ({drivers, setDrivers}) => {
     const [selectedYear, setSelectedYear] = useState(currentYear)
     const [showYearSelect, setShowYearSelect] = useState(false)
     const [loadingDrivers, setLoadingDrivers] = useState(true)
-
+    console.log(drivers)
     useEffect(() => {
         setDrivers(selectedYear, () => setLoadingDrivers(false))
     }, [selectedYear])

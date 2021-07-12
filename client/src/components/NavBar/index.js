@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import {
     Navbar,
     NavbarToggler,
@@ -8,7 +7,6 @@ import {
     NavItem,
     NavLink,
     Collapse,
-    Container
   } from "shards-react";
   
 import { Link } from 'react-router-dom'
@@ -16,10 +14,7 @@ import { PATHS,  getRoute } from '../../utils/constants'
 import './style.css'
 const NavBar = () => {
         
-    const [activeItem, setActiveItem] = useState(() => {
-        // get the path name
-        return getRoute(window.location.pathname)   
-    })
+    const [activeItem, setActiveItem] = useState(getRoute(window.location.pathname))
     const [collapseOpen, setCollapseOpen] = useState(false)
     const handleItemClick = ({target:{pathname}}) => setActiveItem(getRoute(pathname))
     return (
@@ -49,6 +44,16 @@ const NavBar = () => {
                         onClick={handleItemClick}
                     >
                         Drivers
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink 
+                        active={activeItem === PATHS.RACE_NO_PARAMS.name} 
+                        tag={Link} 
+                        to={PATHS.RACE_NO_PARAMS.route}
+                        onClick={handleItemClick}
+                    >
+                        Last Race
                     </NavLink>
                 </NavItem>
                 <NavItem>
