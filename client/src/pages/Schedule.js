@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 import {NextRace, NextRaceHeader} from '../components/NextRace';
 import GrandPrixCard from '../components/GrandPrixCard';
 import YearPicker from '../components/YearPicker';
+import Loading from '../components/Loading';
+
 import {setSchedule} from '../redux/actions';
 import {currentYear, onCurrentYear} from '../utils/constants';
-import { Loader} from 'semantic-ui-react';
 import {Container, Row, Col} from 'shards-react'
 import './PagesStyle.css'
 const Schedule = ({schedule, setSchedule, nextRace}) => {
@@ -60,7 +61,7 @@ const Schedule = ({schedule, setSchedule, nextRace}) => {
                         }
                     </Row>
                 </Container>
-            ) : <Loader content='Loading races...'/>
+            ) : <Loading content='Loading races...'/>
             }
         </Container>
     )

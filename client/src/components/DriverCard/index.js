@@ -38,7 +38,7 @@ const DriverCard = ({driverInfo}) => {
                 />
             </div>
             <Divider />
-            <span>{constructor.name}</span>
+            <span className="constructorName">{constructor.name}</span>
         </div>
     )
 }

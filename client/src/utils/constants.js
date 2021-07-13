@@ -19,6 +19,7 @@ export const countries = [
     {nat:"Afrikaans", code: "af"},
     {nat:"Akan", code: "ak"},
     {nat:"Albanian", code: "sq"},
+    {nat:'American', code:'us'},
     {nat:"Amharic", code: "am"},
     {nat:"Arabic", code: "ar"},
     {nat:"Aragonese", code: "an"},

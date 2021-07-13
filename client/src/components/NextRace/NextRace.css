@@ -13,3 +13,11 @@
   display: flex;
   flex-flow: column;
 }
+.raceName {
+  font-family: "F1Font-bold";
+  font-size: 1.5em;
+}
+.season {
+  font-family: "F1Font-wide";
+  font-size: 0.8em;
+}

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Loading = () => {
+const Loading = ({content}) => {
     return (
         <div className="loading">
-            Loading...
+            {content ? content : 'Loading...'}
         </div>
     )
 }

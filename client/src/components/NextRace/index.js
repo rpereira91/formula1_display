@@ -23,7 +23,7 @@ export const NextRace = ({nextRace}) => {
                         <span>{raceName} at {circuitName}</span>
                     </Col>
                     <Col sm="12" lg="4">
-                        <span>{dateTime.format('DD-MM-yyyy [at] hh:mm')}</span>
+                        <span>{dateTime.format('ddd, MMM Do, yyyy [at] h:mm a')}</span>
                     </Col>
                 </Row>
                 </Container>
@@ -35,9 +35,9 @@ export const NextRace = ({nextRace}) => {
 export const NextRaceHeader = ({round, raceName, season, onClick}) => {
     return (
         <div onClick={onClick} className="nextRaceHeader">
-            <span>Next-Round {round}</span>
-            <span>{raceName}</span>
-            <span>{season}</span>
+            <span className="upNext">Next-Round {round}</span>
+            <span className="raceName">{raceName}</span>
+            <span className="season">{season}</span>
         </div>
     )
 }
