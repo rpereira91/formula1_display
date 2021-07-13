@@ -9,13 +9,6 @@ const DriverCard = ({driverInfo}) => {
     const constructor = driverInfo.Constructors[0]
     return (
         <div className="infoCard">
-            <span className="roundInfo">
-                <Flag 
-                    code={getCountryCode(driverInfo.Driver.nationality)}
-                    height="32"
-                    fallback={driverInfo.Driver.nationality}
-                />
-            </span>
             <span className="driverHeader">
                 <BoldDisplay 
                     upper={driverInfo.position}
@@ -32,7 +25,14 @@ const DriverCard = ({driverInfo}) => {
                 </div>
             </span>
             <Divider />
-            <span className="boldLarge">#{driverInfo.Driver.permanentNumber} {driverInfo.Driver.givenName} {driverInfo.Driver.familyName}  </span>
+            <div  className="driverHeader">
+                <span className="boldLarge">#{driverInfo.Driver.permanentNumber} {driverInfo.Driver.givenName} {driverInfo.Driver.familyName}  </span>
+                <Flag 
+                    code={getCountryCode(driverInfo.Driver.nationality)}
+                    height="25"
+                    fallback={driverInfo.Driver.nationality}
+                />
+            </div>
             <Divider />
             <span>{constructor.name}</span>
         </div>
