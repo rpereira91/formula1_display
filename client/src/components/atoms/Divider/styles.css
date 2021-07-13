@@ -1,0 +1,6 @@
+div.divider {
+  border-top: 1px solid #bbb;
+  width: 80%;
+  margin-top: 0.5em;
+  margin-left: 10%;
+}

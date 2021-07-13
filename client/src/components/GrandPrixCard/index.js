@@ -1,5 +1,7 @@
 import React from 'react'
 import {Button } from "shards-react";
+import BoldDisplay from '../atoms/BoldDisplay';
+import Divider from '../atoms/Divider';
 import moment from 'moment'
 import "./styles.css";
 import { Link } from 'react-router-dom'
@@ -11,23 +13,26 @@ const GrandPrixCard = ({raceInfo}) => {
     const url = raceInfo['url'] || ''
     const getMonths = () => {
         if (raceEnd.month() !== raceStart.month()) {
-            return (<span>{`${raceEnd.format("MMM")} - ${raceStart.format("MMM")}`}</span>)
+            return (<span>{`${raceEnd.format("MMM").toUpperCase()} - ${raceStart.format("MMM").toUpperCase()}`}</span>)
         }
         return (<span>{raceEnd.format("MMM")}</span>)
     }
     return (
         <div className="infoCard">
             <span className="roundInfo">Round {raceRound}</span>
-            <div className="dateContainer">
-                <span className="boldLarge">{`${raceStart.format("DD")} - ${raceEnd.format("DD")}`}</span>
-                <span>{getMonths()}</span>
+            <div className="driverHeader">
+                <BoldDisplay 
+                    upper={`${raceStart.format("DD")} - ${raceEnd.format("DD")}`}
+                    bolded={getMonths()}
+                />
             </div>
-            <div className="solid"/>
+
+            <Divider/>
             <div className="infoContainer">
                 <span className="boldLarge">{raceInfo['Circuit']['Location']['country']}</span>
                 <span>{raceInfo['Circuit']['circuitName']} </span>
             </div>
-            <div className="solid"/>
+            <Divider/>
             <div className="footerButtons">
                 <Button outline theme="success" onClick={() => window.open(url, "_blank")}>Wiki</Button>
                 <Button outline theme="light" tag={Link} to={`/race/${raceRound}/${raceInfo['season']}`}>Race Info</Button>

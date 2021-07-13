@@ -5,7 +5,7 @@ const Qualifying = ({qualifying}) => {
     return (
         <div>
             <span className="subTitle">Qualifying</span>
-            <div className="tableContainer">
+            <div className="tableContainer qualifying">
                 <table>
                     <col />
                     <colgroup span="1"></colgroup>

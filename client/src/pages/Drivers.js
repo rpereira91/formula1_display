@@ -25,7 +25,7 @@ const Drivers = ({drivers, setDrivers}) => {
     }, [selectedYear, setDriversCallback])
     return (
         <Container className="pageContainer" fluid>
-            <h1 onClick={() => setShowYearSelect(!showYearSelect)}>Drivers</h1>
+            <span className="title" onClick={() => setShowYearSelect(!showYearSelect)}>Drivers</span>
             {showYearSelect && <YearPicker selectedYear={selectedYear} setSelectedYear={setSelectedYear} />}
             {
                 !loadingDrivers && (

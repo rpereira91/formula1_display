@@ -1,5 +1,14 @@
+@font-face {
+  font-family: "F1Font";
+  src: local("F1Font"), url(fonts/Formula1-Regular.ttf) format("woff");
+}
 
 @font-face {
-    font-family: 'F1Font';
-    src: local('F1Font'), url(fonts/Formula1-Regular.ttf) format('woff');
-  }
+  font-family: "F1Font-bold";
+  src: local("F1Font-bold"), url(fonts/Formula1-Bold.ttf) format("woff");
+}
+
+@font-face {
+  font-family: "F1Font-wide";
+  src: local("F1Font-wide"), url(fonts/Formula1-Wide.ttf) format("woff");
+}
