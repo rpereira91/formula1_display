@@ -41,3 +41,9 @@ export const getStandings = (season=2000,) => {
       .then(({data: {MRData:{StandingsTable}}}) => StandingsTable)
       .catch((e) => console.log(e))
 }
+
+export const getWikiImage = (title) => {
+  return axios.get(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles=${title}&origin=*`)
+    .then(({data : {query: {pages}}}) => pages)
+    .catch((e) => console.log(e))
+}

@@ -7,6 +7,7 @@ import Loading from '../components/Loading';
 
 import {setSchedule} from '../redux/actions';
 import {currentYear, onCurrentYear} from '../utils/constants';
+import {getWikiImage} from '../utils/api';
 import {Container, Row, Col} from 'shards-react'
 import './PagesStyle.css'
 const Schedule = ({schedule, setSchedule, nextRace}) => {
@@ -22,6 +23,10 @@ const Schedule = ({schedule, setSchedule, nextRace}) => {
     )
     const nextRaceRef = useRef(null);
     useEffect(() => {
+        getWikiImage("2021_Emilia_Romagna_Grand_Prix")
+            .then((pages) => {
+                Object.keys(pages).map((page) => console.log(pages[page].original.source))
+            })
         setScheduleCallback()
     }, [setScheduleCallback])
     const executeScroll = () => nextRaceRef.current.scrollIntoView()
