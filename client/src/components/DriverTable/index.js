@@ -7,8 +7,8 @@ const DriverTable = ({drivers}) => {
     return (
         <Row>
             {
-                drivers.map((driver) => (
-                    <Col sm="12" md="6" lg="3">
+                drivers.map((driver, index) => (
+                    <Col sm="12" md="6" lg={index > 2 ? "3":"4"}>
                         <DriverCard driverInfo={driver}/>
                     </Col>
                 ))

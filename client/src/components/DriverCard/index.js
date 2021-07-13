@@ -18,10 +18,14 @@ const DriverCard = ({driverInfo}) => {
                         upper={driverInfo.points}
                         bolded="PTS"
                     />
-                    <BoldDisplay
-                        upper={driverInfo.wins}
-                        bolded="WINS"
-                    />
+                    {
+                        driverInfo.wins > 0 && (
+                            <BoldDisplay
+                                upper={driverInfo.wins}
+                                bolded="WINS"
+                            />
+                        )
+                    }
                 </div>
             </span>
             <Divider />
