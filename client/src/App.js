@@ -8,7 +8,6 @@ import NavBar from './components/NavBar';
 import { PATHS } from './utils/constants';
 import { Container, } from "shards-react";
 import './App.css';
-
 const Schedule = lazy(() => import('./pages/Schedule'));
 const Drivers = lazy(() => import('./pages/Drivers'));
 const Race = lazy(() => import('./pages/Race'));

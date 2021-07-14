@@ -207,4 +207,4 @@ export const countries = [
 ]
 
 export const currentYear = new Date().getFullYear()
-export const onCurrentYear = (selectedYear) => currentYear == selectedYear
+export const onCurrentYear = (selectedYear) => currentYear === selectedYear

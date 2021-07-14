@@ -1,6 +1,8 @@
 import React from 'react'
 import {Row, Container, Col} from 'shards-react'
 import moment from 'moment'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 
 import "./NextRace.css";
 
@@ -35,9 +37,14 @@ export const NextRace = ({nextRace}) => {
 export const NextRaceHeader = ({round, raceName, season, onClick}) => {
     return (
         <div onClick={onClick} className="nextRaceHeader">
-            <span className="upNext">Next-Round {round}</span>
-            <span className="raceName">{raceName}</span>
-            <span className="season">{season}</span>
+            <div className="headerDownIcon">
+                <FontAwesomeIcon icon={faAngleDoubleDown} />
+            </div>
+            <div className="nextRaceInfo">
+                <span className="upNext">Next-Round {round}</span>
+                <span className="raceName">{raceName}</span>
+                <span className="season">{season}</span>
+            </div>
         </div>
     )
 }

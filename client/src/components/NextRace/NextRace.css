@@ -11,6 +11,12 @@
 }
 .nextRaceHeader {
   display: flex;
+  flex-flow: row;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.nextRaceInfo {
+  display: flex;
   flex-flow: column;
 }
 .raceName {
@@ -20,4 +26,17 @@
 .season {
   font-family: "F1Font-wide";
   font-size: 0.8em;
+}
+.headerDownIcon{
+  width: 2em;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  margin-right: 0.1em;
+  color: white;
+}
+.headerDownIcon:hover{
+  font-size: 1.9em;
 }
