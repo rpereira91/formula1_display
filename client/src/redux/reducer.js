@@ -5,7 +5,13 @@ const INITAL_STATE = {
     schedule: {}, 
     nextRace: {},
     drivers: {},
-    races:{qualifying: [], results: [],url:''}
+    races:{
+        qualifying: [], 
+        results: [],
+        url:'',
+        raceName: null, 
+        circut: null,
+    }
 }
 
 const f1Reducer = (state = INITAL_STATE, action) => {

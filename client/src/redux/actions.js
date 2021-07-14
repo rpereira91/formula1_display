@@ -9,9 +9,7 @@ import {
 } from '../utils/api';
 import {onCurrentYear} from '../utils/constants';
 const setRaceDetails = (details) => {
-    return ({type: SET_RACE, payload: {
-
-    }})
+    return ({type: SET_RACE, payload: details})
 }
 export const setSchedule = (year, completeCallback = () => {}) => (dispatch) => {
     getYearSchedule(year)
@@ -68,7 +66,7 @@ export const setRace = (season, round, noSeasonCallback = () => {}) =>  (dispatc
                 console.log(e)
             })
         getResults(season, round)
-            .then((results) => raceDetails = {...raceDetails, results: results.Races[0]['Results']})
+            .then((results) => raceDetails = {...raceDetails, raceName: results.Races[0]['raceName'], circut: results.Races[0]['Circut'], results: results.Races[0]['Results']})
             .catch((e) => {
                 console.log(e)
             })
