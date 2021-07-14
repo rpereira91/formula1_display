@@ -8,6 +8,11 @@ import {
     getResults
 } from '../utils/api';
 import {onCurrentYear} from '../utils/constants';
+const setRaceDetails = (details) => {
+    return ({type: SET_RACE, payload: {
+
+    }})
+}
 export const setSchedule = (year, completeCallback = () => {}) => (dispatch) => {
     getYearSchedule(year)
         .then((currentSchedule) => {
@@ -56,15 +61,17 @@ export const setRace = (season, round, noSeasonCallback = () => {}) =>  (dispatc
                 console.log(e)
             });
     } else {
+        var raceDetails = {}
         getQualifying(season, round)
-            .then((qualifying) => dispatch({type: SET_RACE, payload: {qualifying: qualifying.Races[0]['QualifyingResults']}}))
+            .then((qualifying) => dispatch({type: SET_RACE, payload: {qualifying: qualifying.Races[0]['QualifyingResults'], url:qualifying.Races[0]['url'] }}))
             .catch((e) => {
                 console.log(e)
             })
         getResults(season, round)
-            .then((results) => dispatch({type: SET_RACE, payload: {results: results.Races[0]['Results']}}))
+            .then((results) => raceDetails = {...raceDetails, results: results.Races[0]['Results']})
             .catch((e) => {
                 console.log(e)
             })
+        dispatch(setRaceDetails(raceDetails))
     }
 }
