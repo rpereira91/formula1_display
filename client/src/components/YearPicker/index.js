@@ -1,8 +1,9 @@
 import React from 'react'
 import Datetime from 'react-datetime';
 import moment from 'moment';
+import { toString } from 'lodash'
 import { Container, Button, Row, Col} from 'shards-react'
-import { currentYear } from '../../utils/constants';
+import { currentYear, onCurrentYear } from '../../utils/constants';
 
 import "./styles.css"
 
@@ -15,7 +16,7 @@ const YearPicker = ({selectedYear, setSelectedYear}) => {
         <Container fluid className="pickerContainer">
             <Row>
                 <Col sm="12" md="4" lg="3">
-                    {`${selectedYear}` !== `${currentYear}` && <Button theme="primary" size="sm"  onClick={() => setSelectedYear(`${currentYear}`)}>Set to current year</Button>}
+                    {!onCurrentYear(selectedYear) && <Button theme="primary" size="sm"  onClick={() => setSelectedYear(`${currentYear}`)}>Set to current year</Button>}
                 </Col>
             </Row>
             <Row>
@@ -24,7 +25,7 @@ const YearPicker = ({selectedYear, setSelectedYear}) => {
                         dateFormat="YYYY" 
                         timeFormat={false}
                         value={`${selectedYear}`}
-                        onChange={(date) => {setSelectedYear(`${date.year()}`)}}
+                        onChange={(date) => {setSelectedYear(toString(date.year()))}}
                         input={false}
                         isValidDate={ valid }
                     />

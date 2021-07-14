@@ -1,3 +1,4 @@
+import {isEqual, toString} from 'lodash'
 export const PATHS = {
     HOME: {route:'/', name:'home'},
     SCHEDULE: {route:'/schedule', name:'schedule'},
@@ -207,4 +208,4 @@ export const countries = [
 ]
 
 export const currentYear = new Date().getFullYear()
-export const onCurrentYear = (selectedYear) => currentYear == selectedYear
+export const onCurrentYear = (selectedYear) => isEqual(toString(currentYear), toString(selectedYear))
