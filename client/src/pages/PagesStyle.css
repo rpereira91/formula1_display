@@ -19,3 +19,7 @@
   display: flex;
   justify-content: space-between;
 }
+.raceHeader {
+  display: flex;
+  flex-direction: column;
+}

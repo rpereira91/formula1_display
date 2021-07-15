@@ -10,7 +10,7 @@ const INITAL_STATE = {
         results: [],
         url:'',
         raceName: null, 
-        circut: null,
+        circuit: null,
     }
 }
 

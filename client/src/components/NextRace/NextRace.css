@@ -1,9 +1,10 @@
 .raceContainer {
   background-color: #8f8f8f;
   width: 100%;
-  height: 15em;
+  min-height: 15em;
   display: flex;
   flex-direction: column;
+  padding: 1em;
 }
 .upNext {
   font-size: larger;
@@ -14,6 +15,10 @@
   flex-flow: row;
   cursor: pointer;
   border-radius: 10px;
+}
+.nextRaceHeaderInfo {
+  display: flex;
+  flex-flow: row;
 }
 .nextRaceInfo {
   display: flex;

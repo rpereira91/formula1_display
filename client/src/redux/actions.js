@@ -8,9 +8,8 @@ import {
     getResults
 } from '../utils/api';
 import {onCurrentYear} from '../utils/constants';
-const setRaceDetails = (details) => {
-    return ({type: SET_RACE, payload: details})
-}
+import _ from 'lodash';
+
 export const setSchedule = (year, completeCallback = () => {}) => (dispatch) => {
     getYearSchedule(year)
         .then((currentSchedule) => {
@@ -37,10 +36,8 @@ export const setSchedule = (year, completeCallback = () => {}) => (dispatch) => 
 export const setDrivers = (year, completeCallback = () => {}) => (dispatch) => {
     getStandings(year)
         .then((standings) => {
-            if (standings['StandingsLists'].length > 0){
-                dispatch({type: SET_DRIVERS, payload: standings['StandingsLists'][0]['DriverStandings']})
-
-            }
+            const driverStandings = _.get(standings, '[StandingsLists][0][DriverStandings]', [])
+            dispatch({type: SET_DRIVERS, payload: driverStandings})
             completeCallback();
         })
         .catch((e) => {
@@ -48,7 +45,7 @@ export const setDrivers = (year, completeCallback = () => {}) => (dispatch) => {
         })
 }
 
-export const setRace = (season, round, noSeasonCallback = () => {}) =>  (dispatch) => {
+export const setRace = (season, round, noSeasonCallback = () => {}, doneLoading = () => {}) =>  (dispatch) => {
     if (!round || !season) {
         // get the last race and fill the info
         getLastRace()
@@ -61,15 +58,36 @@ export const setRace = (season, round, noSeasonCallback = () => {}) =>  (dispatc
     } else {
         var raceDetails = {}
         getQualifying(season, round)
-            .then((qualifying) => dispatch({type: SET_RACE, payload: {qualifying: qualifying.Races[0]['QualifyingResults'], url:qualifying.Races[0]['url'] }}))
+            .then((qualifying) => {
+                const date = _.get(qualifying, 'Races[0][date]', null)
+                const time = _.get(qualifying, 'Races[0][time]', null)
+                raceDetails = {
+                    ...raceDetails, 
+                    qualifying: _.get(qualifying, 'Races[0][QualifyingResults]', []), 
+                    url: _.get(qualifying, 'Races[0][url]', null),
+                    qualifyingDate: {date, time},
+                }
+            })
+            .then(() => {
+                getResults(season, round)
+                    .then((results) => {
+                        const date = _.get(results, 'Races[0][date]', null)
+                        const time = _.get(results, 'Races[0][time]', null)
+                        raceDetails = {
+                            ...raceDetails,
+                            raceName: _.get(results, 'Races[0][raceName]', null), 
+                            circuit: _.get(results, 'Races[0][Circuit]', null),
+                            results: _.get(results, 'Races[0][Results]', []),
+                            resultsDate: {date, time},
+                        }
+                    })
+                    .then(() => {
+                        dispatch({type: SET_RACE, payload: raceDetails})
+                    })
+                    .then(() => doneLoading())
+            })
             .catch((e) => {
                 console.log(e)
             })
-        getResults(season, round)
-            .then((results) => raceDetails = {...raceDetails, raceName: results.Races[0]['raceName'], circut: results.Races[0]['Circut'], results: results.Races[0]['Results']})
-            .catch((e) => {
-                console.log(e)
-            })
-        dispatch(setRaceDetails(raceDetails))
     }
 }
