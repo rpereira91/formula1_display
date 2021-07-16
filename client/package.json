@@ -24,6 +24,7 @@
     "shards-react": "^1.0.3",
     "web-vitals": "^1.0.1"
   },
+  "homepage": "http://ralphpereira.com/f1/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

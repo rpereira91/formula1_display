@@ -3,13 +3,15 @@ import {Button } from "shards-react";
 import BoldDisplay from '../atoms/BoldDisplay';
 import Divider from '../atoms/Divider';
 import moment from 'moment'
-import "./styles.css";
 import { Link } from 'react-router-dom'
+import {get} from 'lodash';
+import "./styles.css";
+
 
 const GrandPrixCard = ({raceInfo}) => {
     const raceStart = moment(raceInfo['date']).subtract(2, 'day');
     const raceEnd = moment(raceInfo['date']);
-    const raceRound = raceInfo['round']
+    const raceRound = get(raceInfo, 'round', null)
     const url = raceInfo['url'] || ''
     const getMonths = () => {
         if (raceEnd.month() !== raceStart.month()) {
@@ -29,14 +31,13 @@ const GrandPrixCard = ({raceInfo}) => {
 
             <Divider/>
             <div className="infoContainer">
-                <span className="boldLarge">{raceInfo['Circuit']['Location']['country']}</span>
+                <span className="boldLarge"><Link className="raceInfoLink" to={`/race/${raceRound}/${raceInfo['season']}`}>{get(raceInfo, '[Circuit][Location][country]', '')}</Link></span>
                 <span>{raceInfo['Circuit']['circuitName']} </span>
             </div>
             <Divider/>
             <div className="footerButtons">
                 <Button outline theme="success" onClick={() => window.open(url, "_blank")}>Wiki</Button>
-                <Button outline theme="light" tag={Link} to={`/race/${raceRound}/${raceInfo['season']}`}>Race Info</Button>
-            </div >
+            </div>
         </div>
     )
 }

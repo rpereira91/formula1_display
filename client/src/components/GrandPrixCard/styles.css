@@ -43,7 +43,12 @@
   font-size: 1.2em;
   font-family: "F1Font-bold";
 }
-
+.raceInfoLink {
+  color: black;
+} 
+.raceInfoLink:hover {
+  color: black;
+}
 .driverHeader {
   display: flex;
   flex-flow: row;

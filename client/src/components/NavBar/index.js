@@ -20,7 +20,7 @@ const NavBar = () => {
     return (
         <div fluid className="navBar">
             <Navbar type="dark" theme="secondary" expand="md" >
-            <NavbarBrand tag={Link} to={PATHS.HOME.route}>
+            <NavbarBrand tag={Link} exact to={PATHS.HOME.route}>
                 <img src="images/formula-1-logo.png" className="headerImage" alt="f1"/><span className="header">Formula 1</span>
             </NavbarBrand>
             <NavbarToggler onClick={() => setCollapseOpen(!collapseOpen)} />

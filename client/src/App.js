@@ -1,5 +1,5 @@
 import React, {lazy, Suspense} from 'react'
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { Route, Switch, HashRouter} from 'react-router-dom';
 import { Provider } from 'react-redux'
 import store from './redux/store';
 import Loading from './components/Loading'
@@ -16,7 +16,7 @@ function App() {
 
   return (
     <Provider store={store}>
-      <Router>
+      <HashRouter>
         <NavBar />
           <Suspense fallback={<Loading />}>
             <Switch>
@@ -29,7 +29,7 @@ function App() {
             </Container>
             </Switch>
           </Suspense>
-      </Router>
+      </HashRouter>
     </Provider>
   );
 }
