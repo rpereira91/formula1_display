@@ -38,7 +38,11 @@ const DriverCard = ({driverInfo}) => {
                 />
             </div>
             <Divider />
-            <span className="constructorName">{constructor.name}</span>
+            {
+                constructor && (
+                    <span className="constructorName">{constructor.name}</span>
+                )
+            }
         </div>
     )
 }
